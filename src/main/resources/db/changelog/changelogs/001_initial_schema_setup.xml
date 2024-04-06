@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create_car_rent_schema" author="pavel">
+        <sql>
+            CREATE SCHEMA IF NOT EXISTS car_rent;
+        </sql>
+    </changeSet>
+
+    <!--
+    rental_center (id, name, address)
+    car (id, rental_center_id, brand, model, gearbox MT/AT (в коде хранить как енам), license plate )
+    client( id, name, surname, email)
+    rental_order (id, client_id, car_id, dateFrom, dateTo)-->
+    <changeSet id="create_rental_center_id_seq" author="pavel">
+        <createSequence sequenceName="rental_center_id_seq" incrementBy="1" schemaName="car_rent"/>
+    </changeSet>
+
+    <changeSet id="create_rental_center_table" author="pavel">
+        <createTable tableName="rental_center" schemaName="car_rent">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="address" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_car_id_sequence" author="pavel">
+        <createSequence sequenceName="car_id_seq" schemaName="car_rent" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create_car_table" author="pavel">
+        <createTable tableName="car" schemaName="car_rent">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="rental_center_id" type="bigint"/>
+            <column name="brand" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gearbox_type" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="license_plate" type="varchar(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="car" baseColumnNames="rental_center_id"
+                                 constraintName="car_rental_center_fk" referencedTableName="rental_center"
+                                 referencedColumnNames="id" baseTableSchemaName="car_rent"
+                                 referencedTableSchemaName="car_rent"/>
+    </changeSet>
+
+    <changeSet id="create_client_id_sequence" author="pavel">
+        <createSequence sequenceName="client_id_seq" schemaName="car_rent" incrementBy="1"/>
+    </changeSet>
+    <changeSet id="create_client_table" author="pavel">
+        <createTable tableName="client" schemaName="car_rent">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(256)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_order_id_sequence" author="pavel">
+        <createSequence sequenceName="order_id_seq" incrementBy="1" schemaName="car_rent"/>
+    </changeSet>
+
+    <changeSet id="create_rental_order_table" author="pavel">
+        <createTable tableName="rental_order" schemaName="car_rent">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_id" type="bigint"/>
+            <column name="car_id" type="bigint"/>
+            <column name="date_from" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_to" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="rental_order" baseColumnNames="client_id"
+                                 constraintName="rental_order_client_fk" referencedTableName="client"
+                                 referencedColumnNames="id" referencedTableSchemaName="car_rent" baseTableSchemaName="car_rent"/>
+        <addForeignKeyConstraint baseTableName="rental_order" baseColumnNames="car_id"
+                                 constraintName="rental_order_car_fk" referencedTableName="car"
+                                 referencedColumnNames="id" referencedTableSchemaName="car_rent" baseTableSchemaName="car_rent"/>
+    </changeSet>
+</databaseChangeLog>
