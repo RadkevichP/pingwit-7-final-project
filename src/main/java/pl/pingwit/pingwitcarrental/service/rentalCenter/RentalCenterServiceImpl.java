@@ -1,14 +1,13 @@
 package pl.pingwit.pingwitcarrental.service.rentalCenter;
 
 import org.springframework.stereotype.Service;
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.CreateRentalCenterInputDto;
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.RentalCenterDto;
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.RentalCenterShortDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.CreateRentalCenterInputDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterShortDto;
 import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenter;
 import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenterRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RentalCenterServiceImpl implements RentalCenterService {

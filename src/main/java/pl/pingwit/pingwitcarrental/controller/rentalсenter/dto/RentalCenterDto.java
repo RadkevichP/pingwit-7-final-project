@@ -1,16 +1,16 @@
-package pl.pingwit.pingwitcarrental.controller.rentalCenter;
+package pl.pingwit.pingwitcarrental.controller.rentalсenter.dto;
 
-public class RentalCenterShortDto {
+import pl.pingwit.pingwitcarrental.controller.car.dto.CarDto;
+
+import java.util.List;
+
+public class RentalCenterDto {
 
     private Integer id;
     private String name;
     private String address;
 
-    public RentalCenterShortDto(Integer id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
+    private List<CarDto> cars;
 
     public Integer getId() {
         return id;
@@ -34,5 +34,13 @@ public class RentalCenterShortDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<CarDto> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<CarDto> cars) {
+        this.cars = cars;
     }
 }

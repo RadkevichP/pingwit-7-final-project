@@ -1,4 +1,4 @@
-package pl.pingwit.pingwitcarrental.controller.rentalorder;
+package pl.pingwit.pingwitcarrental.controller.rentalorder.dto;
 
 import java.time.LocalDateTime;
 

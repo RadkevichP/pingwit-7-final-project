@@ -8,11 +8,6 @@
         </sql>
     </changeSet>
 
-    <!--
-    rental_center (id, name, address)
-    car (id, rental_center_id, brand, model, gearbox MT/AT (в коде хранить как енам), license plate )
-    client( id, name, surname, email)
-    rental_order (id, client_id, car_id, dateFrom, dateTo)-->
     <changeSet id="create_rental_center_id_seq" author="pavel">
         <createSequence sequenceName="rental_center_id_seq" incrementBy="1" schemaName="car_rent"/>
     </changeSet>

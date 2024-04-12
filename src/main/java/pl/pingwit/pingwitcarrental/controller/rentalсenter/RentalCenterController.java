@@ -1,8 +1,11 @@
-package pl.pingwit.pingwitcarrental.controller.rentalCenter;
+package pl.pingwit.pingwitcarrental.controller.rentalсenter;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.CreateRentalCenterInputDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterShortDto;
 import pl.pingwit.pingwitcarrental.service.rentalCenter.RentalCenterService;
 
 import java.util.List;

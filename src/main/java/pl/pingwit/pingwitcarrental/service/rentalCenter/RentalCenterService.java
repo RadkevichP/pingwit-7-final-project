@@ -1,8 +1,8 @@
 package pl.pingwit.pingwitcarrental.service.rentalCenter;
 
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.CreateRentalCenterInputDto;
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.RentalCenterDto;
-import pl.pingwit.pingwitcarrental.controller.rentalCenter.RentalCenterShortDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.CreateRentalCenterInputDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterDto;
+import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterShortDto;
 
 import java.util.List;
 

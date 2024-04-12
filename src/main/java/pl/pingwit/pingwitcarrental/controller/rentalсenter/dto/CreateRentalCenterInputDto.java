@@ -1,4 +1,4 @@
-package pl.pingwit.pingwitcarrental.controller.rentalCenter;
+package pl.pingwit.pingwitcarrental.controller.rentalсenter.dto;
 
 public class CreateRentalCenterInputDto {
 

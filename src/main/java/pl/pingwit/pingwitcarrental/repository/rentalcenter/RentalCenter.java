@@ -29,6 +29,10 @@ public class RentalCenter {
     public RentalCenter() {
     }
 
+    public RentalCenter(Integer id) {
+        this.id = id;
+    }
+
     public RentalCenter(String name, String address) {
         this.name = name;
         this.address = address;
