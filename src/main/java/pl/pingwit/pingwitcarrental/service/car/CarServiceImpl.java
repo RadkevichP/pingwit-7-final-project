@@ -30,7 +30,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public CarDto getCar(Integer id) {
         return carRepository.findById(id).map(carConverter::toDto)
-                .orElseThrow(() -> new CarRentNotFoundException("Car with id not found: " + id));
+                .orElseThrow(() -> new CarRentNotFoundException(String.format("Car with id not found: %s", id)));
     }
 
     @Override
