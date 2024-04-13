@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CarDto;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CreateCarInputDto;
+import pl.pingwit.pingwitcarrental.repository.car.Car;
 import pl.pingwit.pingwitcarrental.repository.car.CarRepository;
 
 @Service
@@ -32,6 +33,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Integer createCar(CreateCarInputDto carDto) {
-        return carRepository.save(carConverter.toEntity(carDto)).getId();
+        Car toSave = carConverter.toEntity(carDto);
+        return carRepository.save(toSave).getId();
     }
 }

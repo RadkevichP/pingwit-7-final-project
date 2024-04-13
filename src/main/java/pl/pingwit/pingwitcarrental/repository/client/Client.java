@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import pl.pingwit.pingwitcarrental.repository.rentalorder.RentalOrder;
+
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -35,7 +38,6 @@ public class Client {
     }
 
     public Client(String name, String surname, String email) {
-        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;

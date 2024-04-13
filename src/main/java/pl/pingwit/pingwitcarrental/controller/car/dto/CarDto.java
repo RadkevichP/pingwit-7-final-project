@@ -9,6 +9,7 @@ public class CarDto {
     private String model;
     private String licensePlate;
     private Integer rentalCenterId;
+    private GearboxTypeDto gearboxTypeDto;
 
     public Integer getId() {
         return id;
@@ -50,16 +51,24 @@ public class CarDto {
         this.rentalCenterId = rentalCenterId;
     }
 
+    public GearboxTypeDto getGearboxTypeDto() {
+        return gearboxTypeDto;
+    }
+
+    public void setGearboxTypeDto(GearboxTypeDto gearboxTypeDto) {
+        this.gearboxTypeDto = gearboxTypeDto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarDto carDto = (CarDto) o;
-        return Objects.equals(id, carDto.id) && Objects.equals(brand, carDto.brand) && Objects.equals(model, carDto.model) && Objects.equals(licensePlate, carDto.licensePlate) && Objects.equals(rentalCenterId, carDto.rentalCenterId);
+        return Objects.equals(id, carDto.id) && Objects.equals(brand, carDto.brand) && Objects.equals(model, carDto.model) && Objects.equals(licensePlate, carDto.licensePlate) && Objects.equals(rentalCenterId, carDto.rentalCenterId) && gearboxTypeDto == carDto.gearboxTypeDto;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, brand, model, licensePlate, rentalCenterId);
+        return Objects.hash(id, brand, model, licensePlate, rentalCenterId, gearboxTypeDto);
     }
 }

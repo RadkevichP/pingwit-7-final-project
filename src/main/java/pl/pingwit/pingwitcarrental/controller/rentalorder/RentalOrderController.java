@@ -27,7 +27,7 @@ public class RentalOrderController {
         return rentalOrderService.listOrders();
     }
 
-    @GetMapping("/{id]")
+    @GetMapping("/{id}")
     public RentalOrderDto getOrder(@PathVariable Integer id) {
         return rentalOrderService.getOrder(id);
     }
