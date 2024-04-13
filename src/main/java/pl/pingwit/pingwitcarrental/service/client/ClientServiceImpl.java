@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import pl.pingwit.pingwitcarrental.controller.client.dto.ClientDto;
 import pl.pingwit.pingwitcarrental.controller.client.dto.CreateClientInputDto;
+import pl.pingwit.pingwitcarrental.exceptionhandling.CarRentNotFoundException;
 import pl.pingwit.pingwitcarrental.repository.client.ClientRepository;
 
 @Service
@@ -27,7 +28,8 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto getClientById(Integer id) {
-        return clientRepository.findById(id).map(clientConverter::toDto).orElseThrow();
+        return clientRepository.findById(id).map(clientConverter::toDto)
+                .orElseThrow(() -> new CarRentNotFoundException("Client not found: " +id));
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CarDto;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CreateCarInputDto;
+import pl.pingwit.pingwitcarrental.exceptionhandling.CarRentNotFoundException;
 import pl.pingwit.pingwitcarrental.repository.car.Car;
 import pl.pingwit.pingwitcarrental.repository.car.CarRepository;
 
@@ -28,7 +29,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDto getCar(Integer id) {
-        return carRepository.findById(id).map(carConverter::toDto).orElseThrow();
+        return carRepository.findById(id).map(carConverter::toDto)
+                .orElseThrow(() -> new CarRentNotFoundException("Car with id not found: " + id));
     }
 
     @Override
