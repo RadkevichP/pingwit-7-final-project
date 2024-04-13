@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.CreateRentalCenterInputDto;
 import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterDto;
 import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterShortDto;
+import pl.pingwit.pingwitcarrental.exceptionhandling.CarRentNotFoundException;
 import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenter;
 import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenterRepository;
 
@@ -29,7 +30,7 @@ public class RentalCenterServiceImpl implements RentalCenterService {
 
     @Override
     public RentalCenterDto getCenter(Integer id) {
-        RentalCenter rentalCenter = repository.findById(id).orElseThrow();
+        RentalCenter rentalCenter = repository.findById(id).orElseThrow(() -> new CarRentNotFoundException("Rental Center not found: " + id));
         return converter.convertToDto(rentalCenter);
     }
 
