@@ -9,7 +9,6 @@ import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenter;
 @Component
 public class RentalCenterConverter {
 
-
     public RentalCenter convertToEntity(CreateRentalCenterInputDto inputDto) {
         return new RentalCenter(inputDto.getName(), inputDto.getAddress());
     }
