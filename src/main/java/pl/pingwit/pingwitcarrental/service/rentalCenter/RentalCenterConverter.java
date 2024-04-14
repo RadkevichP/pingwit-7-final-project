@@ -5,9 +5,16 @@ import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.CreateRentalCent
 import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterDto;
 import pl.pingwit.pingwitcarrental.controller.rentalсenter.dto.RentalCenterShortDto;
 import pl.pingwit.pingwitcarrental.repository.rentalcenter.RentalCenter;
+import pl.pingwit.pingwitcarrental.service.car.CarConverter;
 
 @Component
 public class RentalCenterConverter {
+
+    private final CarConverter carConverter;
+
+    public RentalCenterConverter(CarConverter carConverter) {
+        this.carConverter = carConverter;
+    }
 
     public RentalCenter convertToEntity(CreateRentalCenterInputDto inputDto) {
         return new RentalCenter(inputDto.getName(), inputDto.getAddress());
@@ -23,7 +30,9 @@ public class RentalCenterConverter {
         result.setAddress(rentalCenter.getAddress());
         result.setName(rentalCenter.getName());
 
-        // todo: add cars
+        result.setCars(rentalCenter.getCars().stream()
+                .map(carConverter::toDto)
+                .toList());
         return result;
     }
 }
