@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @Testcontainers
 @SpringBootTest(classes = PingwitcarrentalApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,8 +52,9 @@ class RentalCenterIT {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<CreateRentalCenterInputDto> request = new HttpEntity<>(inputDto, headers);
 
-        // rental center creation
         String rentalCenterUrl = "http://localhost:" + port + "/rental-center";
+
+        // rental center creation
         ResponseEntity<Integer> createdResponse = restTemplate.postForEntity(rentalCenterUrl, request, Integer.class);
 
         assertThat(createdResponse.getStatusCode().is2xxSuccessful()).isTrue();
@@ -66,8 +68,8 @@ class RentalCenterIT {
         assertThat(rentalCenterDto.getName()).isEqualTo("Test Name");
 
         // retrieve a list of rental centers
-        ResponseEntity<List<RentalCenterShortDto>> exchange = restTemplate.exchange(rentalCenterUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<RentalCenterShortDto>>() {
-        });
+        ResponseEntity<List<RentalCenterShortDto>> exchange = restTemplate.exchange(rentalCenterUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<RentalCenterShortDto>>() {});
+
         assertThat(exchange.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(exchange.getBody().size()).isEqualTo(1);
     }

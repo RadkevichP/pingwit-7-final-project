@@ -1,4 +1,4 @@
-name: CI Build for CI Training project
+name: CI Build for Car Rent project
 
 on:
   push:
