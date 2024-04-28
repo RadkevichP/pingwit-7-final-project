@@ -4,8 +4,10 @@ package pl.pingwit.pingwitcarrental.integration;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.web.client.RestTemplate;
@@ -23,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @Testcontainers
-@SpringBootTest(classes = PingwitcarrentalApplication.class,
+@SpringBootTest(classes = {PingwitcarrentalApplication.class},
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RentalCenterIT {
 
@@ -50,6 +52,7 @@ class RentalCenterIT {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBasicAuth("admin", "admin");
         HttpEntity<CreateRentalCenterInputDto> request = new HttpEntity<>(inputDto, headers);
 
         String rentalCenterUrl = "http://localhost:" + port + "/rental-center";
@@ -68,7 +71,9 @@ class RentalCenterIT {
         assertThat(rentalCenterDto.getName()).isEqualTo("Test Name");
 
         // retrieve a list of rental centers
-        ResponseEntity<List<RentalCenterShortDto>> exchange = restTemplate.exchange(rentalCenterUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<RentalCenterShortDto>>() {});
+        HttpEntity<CreateRentalCenterInputDto> request2 = new HttpEntity<>(headers);
+        ResponseEntity<List<RentalCenterShortDto>> exchange = restTemplate.exchange(rentalCenterUrl, HttpMethod.GET, request2, new ParameterizedTypeReference<List<RentalCenterShortDto>>() {
+        });
 
         assertThat(exchange.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(exchange.getBody().size()).isEqualTo(1);
