@@ -17,7 +17,7 @@ import pl.pingwit.pingwitcarrental.repository.car.Car;
 import pl.pingwit.pingwitcarrental.repository.client.Client;
 
 @Entity
-@Table(name = "rental_order")
+@Table(name = "rental_order", schema = "car_rent")
 public class RentalOrder {
 
     @Id

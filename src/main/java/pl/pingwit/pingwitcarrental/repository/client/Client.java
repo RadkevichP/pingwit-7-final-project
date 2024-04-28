@@ -12,7 +12,7 @@ import pl.pingwit.pingwitcarrental.repository.rentalorder.RentalOrder;
 import java.util.List;
 
 @Entity
-@Table(name = "client")
+@Table(name = "client", schema = "car_rent")
 public class Client {
 
     @Id
