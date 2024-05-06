@@ -2,6 +2,8 @@ package pl.pingwit.pingwitcarrental.service.car;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CarDto;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CreateCarInputDto;
@@ -9,13 +11,17 @@ import pl.pingwit.pingwitcarrental.exceptionhandling.CarRentNotFoundException;
 import pl.pingwit.pingwitcarrental.repository.car.Car;
 import pl.pingwit.pingwitcarrental.repository.car.CarRepository;
 
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
+
 @Service
+@Scope("singleton")
 public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
     private final CarConverter carConverter;
 
-    public CarServiceImpl(CarRepository carRepository, CarConverter carConverter) {
+    public CarServiceImpl(CarRepository carRepository,
+                          CarConverter carConverter) {
         this.carRepository = carRepository;
         this.carConverter = carConverter;
     }

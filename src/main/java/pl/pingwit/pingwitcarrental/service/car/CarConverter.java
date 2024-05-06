@@ -1,5 +1,6 @@
 package pl.pingwit.pingwitcarrental.service.car;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CarDto;
 import pl.pingwit.pingwitcarrental.controller.car.dto.CreateCarInputDto;
